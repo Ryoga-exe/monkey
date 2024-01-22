@@ -4,6 +4,7 @@ import "github.com/Ryoga-exe/monkey/internal/token"
 
 type Node interface {
 	TokenLiteral() string
+	String() string
 }
 
 type Statement interface {
@@ -39,6 +40,7 @@ func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
 type LetStatement struct {
 	Token token.Token
 	Name  *Identifier
+	Value Expression
 }
 
 func (ls *LetStatement) statementNode()       {}
@@ -51,3 +53,11 @@ type ReturnStatement struct {
 
 func (rs *ReturnStatement) statementNode()       {}
 func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
+
+type ExpressionStatement struct {
+	Token      token.Token
+	Expression Expression
+}
+
+func (es *ExpressionStatement) statementNode()       {}
+func (es *ExpressionStatement) TokenLiteral() string { return es.Token.Literal }

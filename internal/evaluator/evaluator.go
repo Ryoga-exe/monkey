@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	NULL  = &object.Null{}
 	TRUE  = &object.Boolean{Value: true}
 	FALSE = &object.Boolean{Value: false}
 )
@@ -23,7 +24,6 @@ func Eval(node ast.Node) object.Object {
 	case *ast.Boolean:
 		return nativeBoolToBooleanObject(node.Value)
 	}
-
 	return nil
 }
 

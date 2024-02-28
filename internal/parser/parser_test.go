@@ -205,7 +205,7 @@ func TestParsingPrefixExpression(t *testing.T) {
 	}
 }
 
-func TestParsingIndixExpressions(t *testing.T) {
+func TestParsingInfixExpressions(t *testing.T) {
 	infixTests := []struct {
 		input      string
 		leftValue  int64

@@ -13,7 +13,7 @@ var (
 	FALSE = &object.Boolean{Value: false}
 )
 
-func Eval(node ast.Node) object.Object {
+func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {
 	// Statements
 	case *ast.Program:
@@ -28,6 +28,13 @@ func Eval(node ast.Node) object.Object {
 			return val
 		}
 		return &object.ReturnValue{Value: val}
+	case *ast.LetStatement:
+		val := Eval(node.Value)
+		if isError(val) {
+			return val
+		}
+		// TODO
+		return NULL
 	// Expressions
 	case *ast.IntegerLiteral:
 		return &object.Integer{Value: node.Value}

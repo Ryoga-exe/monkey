@@ -1,6 +1,10 @@
 package evaluator
 
-import "github.com/Ryoga-exe/monkey/internal/object"
+import (
+	"fmt"
+
+	"github.com/Ryoga-exe/monkey/internal/object"
+)
 
 var builtins = map[string]*object.Builtin{
 	"len": {
@@ -91,6 +95,15 @@ var builtins = map[string]*object.Builtin{
 			newElements[length] = args[1]
 
 			return &object.Array{Elements: newElements}
+		},
+	},
+	"puts": {
+		Fn: func(args ...object.Object) object.Object {
+			for _, args := range args {
+				fmt.Println(args.Inspect())
+			}
+
+			return NULL
 		},
 	},
 }

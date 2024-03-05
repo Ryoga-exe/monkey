@@ -34,6 +34,11 @@ func Modify(node Node, modifier ModifierFunc) Node {
 		if node.Alternative != nil {
 			node.Alternative, _ = Modify(node.Alternative, modifier).(*BlockStatement)
 		}
+	case *FunctionLiteral:
+		for i := range node.Parameters {
+			node.Parameters[i], _ = Modify(node.Parameters[i], modifier).(*Identifier)
+		}
+		node.Body, _ = Modify(node.Body, modifier).(*BlockStatement)
 	}
 
 	return modifier(node)

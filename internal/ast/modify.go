@@ -15,6 +15,8 @@ func Modify(node Node, modifier ModifierFunc) Node {
 		for i, statement := range node.Statements {
 			node.Statements[i], _ = Modify(statement, modifier).(Statement)
 		}
+	case *LetStatement:
+		node.Value, _ = Modify(node.Value, modifier).(Expression)
 	case *ReturnStatement:
 		node.ReturnValue, _ = Modify(node.ReturnValue, modifier).(Expression)
 	// Expressions

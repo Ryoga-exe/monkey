@@ -98,6 +98,20 @@ func TestStringConcatenation(t *testing.T) {
 	}
 }
 
+func TestStringRepetition(t *testing.T) {
+	input := `"Hello" * 4`
+
+	evaluated := testEval(input)
+	str, ok := evaluated.(*object.String)
+	if !ok {
+		t.Fatalf("object is not String. got=%T (%+v)", evaluated, evaluated)
+	}
+
+	if str.Value != "HelloHelloHelloHello" {
+		t.Errorf("String has wrong value. got=%q", str.Value)
+	}
+}
+
 func TestBangOperator(t *testing.T) {
 	tests := []struct {
 		input    string
